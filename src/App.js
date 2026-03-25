@@ -1,25 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomePage from "./pages/homepage";
+import LecturerDashboard from "./pages/Lecturer - dashboard";
+
+export default function App() {
+  const hash = window.location.hash.replace("#", "").toLowerCase();
+  if (hash === "home") return <HomePage />;
+
+  // Default to lecturer dashboard so you can preview the UI immediately.
+  // Use `#home` to switch back.
+  return <LecturerDashboard />;
 }
-
-export default App;
