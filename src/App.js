@@ -24,6 +24,8 @@ export default function App() {
   if (hash === "student-dashboard") return <StudentDashboard />;
   if (hash === "admin-course") return <AdminCourse />;
   if (hash === "admin-profile") return <AdminProfile />;
+  if (hash === "lecturer-analytics") return <LecturerAnalytics />;
+}
 >>>>>>> 9d5d191 (Admin - Courses Part Created)
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
         <Route path="/student-notice" element={<StudentNotice />} />
         <Route path="/admin-course" element={<AdminCourse />} />
         <Route path="/admin-profile" element={<AdminProfile />} />
+        <Route path="/lecturer-analytics" element={<LecturerAnalytics />} />
+
       </Routes>
     </Router>
   );
