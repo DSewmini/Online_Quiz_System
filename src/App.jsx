@@ -1,52 +1,7 @@
 import logo from "./assets/logo.png";
-import { FiLogOut, FiSearch, FiUserPlus } from "react-icons/fi";
+import { FiLogOut, FiSearch, FiDownload } from "react-icons/fi";
 
 export default function App() {
-  const stats = [
-    { label: "Total Users", value: "07", icon: "👥" },
-    { label: "Lecturers", value: "01", icon: "👨‍🏫" },
-    { label: "Students", value: "05", icon: "🎓" },
-    { label: "Active Users", value: "06", icon: "✅" },
-  ];
-
-  const users = [
-    {
-      name: "Sunil Joshi",
-      role: "Lecturer",
-      email: "lecture@quiz.com",
-      status: "Active",
-      avatar: "👨‍🏫",
-    },
-    {
-      name: "John Doe",
-      role: "Student",
-      email: "student@quiz.com",
-      status: "Active",
-      avatar: "🧑‍🎓",
-    },
-    {
-      name: "Nirav Joshi",
-      role: "Lecturer",
-      email: "lecturer@quiz.com",
-      status: "Active",
-      avatar: "👨‍🏫",
-    },
-    {
-      name: "Yuvraj Sheth",
-      role: "Student",
-      email: "student@quiz.com",
-      status: "Inactive",
-      avatar: "🧑‍🎓",
-    },
-    {
-      name: "Michael Doe",
-      role: "Admin",
-      email: "admin@quiz.com",
-      status: "Active",
-      avatar: "👨‍💼",
-    },
-  ];
-
   const sidebar = [
     { name: "Dashboard", icon: "📊" },
     { name: "User Management", icon: "👥" },
@@ -56,18 +11,40 @@ export default function App() {
     { name: "Profile", icon: "👤" },
   ];
 
+  const stats = [
+    { label: "Active Sessions", value: "12", icon: "🖥️" },
+    { label: "Recent Activities", value: "04", icon: "🟢" },
+    { label: "Today's Attempts", value: "02", icon: "👥" },
+    { label: "Alerts", value: "02", icon: "🔔" },
+  ];
+
+  const activities = [
+    ["John Smith", "Student", "Completed quiz", "Introduction to React", "2 hours ago"],
+    ["Emma Watson", "Student", "Started quiz", "Database Fundamentals", "2 hours ago"],
+    ["Lalith Perera", "Lecturer", "Created quiz", "Python Programming Basics", "2 hours ago"],
+    ["David Brown", "Student", "Completed quiz", "Python Programming Basics", "2 hours ago"],
+  ];
+
+  const logs = [
+    ["01", "Q1", "25/25 (100%)", "20m 0s", "17/03/2026, 16:20:00"],
+    ["01", "Q2", "25/25 (100%)", "20m 0s", "17/03/2026, 14:30:00"],
+    ["03", "Q2", "10/10 (100%)", "15m 0s", "16/03/2026, 10:15:00"],
+    ["02", "Q1", "10/10 (100%)", "15m 0s", "16/03/2026, 16:18:00"],
+  ];
+
   return (
     <div className="min-h-screen bg-[#161616] p-6 font-sans">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-md bg-white shadow-2xl">
-        <div className="border-b border-black/10 bg-[#1e1e1e] px-4 py-2 text-3xl text-white/40">
-          User Management
-        </div>
 
         <div className="flex min-h-screen">
           <aside className="flex w-64 flex-col justify-between bg-gradient-to-b from-[#5e4bc2] to-[#4f4699] text-white">
             <div>
               <div className="flex items-center justify-center border-b border-gray-200 bg-white py-6">
-                <img src={logo} alt="Quiz Hub Logo" className="h-16 object-contain" />
+                <img
+                  src={logo}
+                  alt="Quiz Hub Logo"
+                  className="h-30 object-contain"
+                />
               </div>
 
               <nav className="px-5 py-8">
@@ -76,7 +53,7 @@ export default function App() {
                     <li
                       key={item.name}
                       className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
-                        index === 1
+                        index === 4
                           ? "bg-white/10 text-white shadow-inner"
                           : "text-white/90 hover:bg-white/10"
                       }`}
@@ -112,21 +89,37 @@ export default function App() {
                   👨‍💼
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Vihanga Sathsara</p>
-                  <p className="text-xs text-gray-500">Administrator</p>
+                  <p className="text-sm font-semibold text-gray-900">
+                    Vihanga Sathsara
+                  </p>
                 </div>
+                <div className="text-lg">🔔</div>
               </div>
             </header>
 
             <div className="space-y-8 p-8">
-              <section>
-                <h1 className="text-4xl font-bold text-black">User Management</h1>
-                <p className="mt-1 text-lg text-black/70">Manage all system users</p>
+              <section className="flex items-start justify-between">
+                <div>
+                  <h1 className="text-4xl font-bold text-black">
+                    Activity Monitoring
+                  </h1>
+                  <p className="mt-1 text-base text-black/70">
+                    Track and monitor system activities
+                  </p>
+                </div>
+
+                <button className="inline-flex items-center gap-2 rounded-lg bg-[#7a3ff2] px-4 py-2 text-sm font-semibold text-white shadow-md hover:opacity-90">
+                  <FiDownload />
+                  Export Reports
+                </button>
               </section>
 
               <section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {stats.map((card) => (
-                  <div key={card.label} className="rounded-xl bg-[#5c4eb1] p-5 text-white shadow-lg">
+                  <div
+                    key={card.label}
+                    className="rounded-xl bg-[#5c4eb1] p-5 text-white shadow-lg"
+                  >
                     <div className="flex items-start justify-between">
                       <div>
                         <p className="text-sm text-white/80">{card.label}</p>
@@ -140,65 +133,100 @@ export default function App() {
                 ))}
               </section>
 
-              <section className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="flex w-full max-w-md items-center gap-3 rounded-full border border-gray-400 bg-white px-4 py-3 shadow-sm">
-                  <FiSearch className="text-gray-500" />
-                  <input
-                    type="text"
-                    placeholder="Search users by email or name........"
-                    className="w-full bg-transparent text-sm outline-none"
-                  />
+              <section className="rounded-2xl bg-[#34295f] p-6 shadow-lg">
+                <div className="mb-4 flex items-center gap-2">
+                  <h2 className="text-xl font-semibold text-[#ff5b5b]">
+                    Suspicious Activity Alerts
+                  </h2>
+                  <span className="text-red-500">🔴</span>
                 </div>
 
-                <button className="inline-flex items-center gap-2 rounded-lg bg-[#7a3ff2] px-4 py-3 text-sm font-semibold text-white shadow-md hover:opacity-90">
-                  <FiUserPlus />
-                  Add user
-                </button>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between rounded-lg bg-[#4a3152] px-5 py-4 text-white">
+                    <div>
+                      <p className="font-semibold text-[#ff7a7a]">Unknown User</p>
+                      <p className="text-xs text-white/70">
+                        Multiple failed login attempts.
+                      </p>
+                      <p className="text-xs text-white/50">5 minutes ago</p>
+                    </div>
+
+                    <button className="rounded-md bg-[#ff5b5b] px-4 py-2 text-xs font-semibold text-white">
+                      Investigate
+                    </button>
+                  </div>
+
+                  <div className="flex items-center justify-between rounded-lg bg-[#4b433f] px-5 py-4 text-white">
+                    <div>
+                      <p className="font-semibold text-[#ffd25f]">John Smith</p>
+                      <p className="text-xs text-white/70">
+                        Rapid quiz submissions
+                      </p>
+                      <p className="text-xs text-white/50">2 hours ago</p>
+                    </div>
+
+                    <button className="rounded-md bg-[#ff5b5b] px-4 py-2 text-xs font-semibold text-white">
+                      Investigate
+                    </button>
+                  </div>
+                </div>
               </section>
 
               <section className="rounded-2xl bg-[#a193e6] p-6 shadow-lg">
-                <div className="mb-6 flex items-center justify-between">
-                  <h2 className="text-xl font-semibold text-white">Users</h2>
-                  <button className="rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm text-white">
-                    March 2025 ▾
-                  </button>
-                </div>
+                <h2 className="mb-4 text-xl font-semibold text-white">
+                  Recent Activities
+                </h2>
 
                 <div className="overflow-x-auto">
-                  <table className="min-w-full text-left text-sm text-[#1d1740]">
+                  <table className="min-w-full overflow-hidden rounded-xl bg-[#5c4eb1] text-left text-sm text-white">
                     <thead>
-                      <tr className="border-b border-[#6e63ae] text-sm font-semibold text-[#231c48]">
+                      <tr className="text-xs text-white/80">
                         <th className="px-4 py-3">Name</th>
-                        <th className="px-4 py-3">Email</th>
-                        <th className="px-4 py-3">Status</th>
-                        <th className="px-4 py-3">Actions</th>
+                        <th className="px-4 py-3">Role</th>
+                        <th className="px-4 py-3">Activity</th>
+                        <th className="px-4 py-3">Module</th>
+                        <th className="px-4 py-3">Time</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {users.map((user) => (
-                        <tr key={user.name} className="border-b border-[#6e63ae] last:border-b-0">
-                          <td className="px-4 py-3">
-                            <div className="flex items-center gap-3">
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/70 text-lg">
-                                {user.avatar}
-                              </div>
-                              <div>
-                                <p className="font-medium">{user.name}</p>
-                                <p className="text-xs text-[#352c68]">{user.role}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="px-4 py-3 text-sm">{user.email}</td>
-                          <td className="px-4 py-3">
-                            <span
-                              className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${
-                                user.status === "Active" ? "bg-green-500" : "bg-red-500"
-                              }`}
-                            >
-                              {user.status}
-                            </span>
-                          </td>
-                          <td className="px-4 py-3 text-sm">Edit</td>
+                      {activities.map((row, index) => (
+                        <tr key={index} className="border-t border-white/10">
+                          {row.map((cell, i) => (
+                            <td key={i} className="px-4 py-4">
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section className="rounded-2xl bg-[#a193e6] p-6 shadow-lg">
+                <h2 className="mb-4 text-xl font-semibold text-white">
+                  Quiz Attempt Logs
+                </h2>
+
+                <div className="overflow-x-auto">
+                  <table className="min-w-full overflow-hidden rounded-xl bg-[#5c4eb1] text-left text-sm text-white">
+                    <thead>
+                      <tr className="text-xs text-white/80">
+                        <th className="px-4 py-3">Student ID</th>
+                        <th className="px-4 py-3">Quiz ID</th>
+                        <th className="px-4 py-3">Score</th>
+                        <th className="px-4 py-3">Time Taken</th>
+                        <th className="px-4 py-3">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {logs.map((row, index) => (
+                        <tr key={index} className="border-t border-white/10">
+                          {row.map((cell, i) => (
+                            <td key={i} className="px-4 py-4">
+                              {cell}
+                            </td>
+                          ))}
                         </tr>
                       ))}
                     </tbody>
