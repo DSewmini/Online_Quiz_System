@@ -386,6 +386,10 @@ export default function StudentSchedule() {
           justify-content:center;
           z-index: 5;
         }
+        /* Override the generic sidebar icon color for the arrow buttons */
+        .ss-arrow .ss-icon{
+          color:#111827;
+        }
         .ss-arrow:hover{ background: rgba(17,24,39,0.06); }
         .ss-arrow--left{ left: -20px; }
         .ss-arrow--right{ right: -20px; }
