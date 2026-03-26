@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+<<<<<<< HEAD
 import logoTrans from "../assets/logo_trans.png";
+=======
+>>>>>>> 112f53f (save work)
 
 const quizzes = [
   {
@@ -236,7 +239,118 @@ function QuizPage({ quiz, onBack }) {
 
   return (
     <div style={{ fontFamily: "'Segoe UI', sans-serif", minHeight: "100vh", display: "flex", flexDirection: "column", background: "#f3f4f6" }}>
+<<<<<<< HEAD
       <div style={{ display: "flex", flex: 1 }}>
+=======
+      {/* Header */}
+      <header style={{
+        background: "#fff",
+        padding: "12px 32px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        boxShadow: "0 1px 4px rgba(0,0,0,0.07)",
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{
+            background: "#5b21b6",
+            color: "#fff",
+            fontWeight: 900,
+            fontSize: 18,
+            borderRadius: 10,
+            padding: "6px 14px",
+            letterSpacing: 1,
+          }}>
+            QUIZ HUB
+          </div>
+          <span style={{ fontSize: 10, color: "#7c3aed", fontWeight: 700, letterSpacing: 2, marginLeft: 2 }}>●●●</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <input
+            type="text"
+            placeholder="Search"
+            style={{
+              border: "1.5px solid #d1d5db",
+              borderRadius: "20px",
+              padding: "8px 20px",
+              fontSize: "14px",
+              outline: "none",
+              width: "220px",
+              background: "#f9fafb",
+              color: "#374151",
+            }}
+          />
+          <div style={{
+            width: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            border: "3px solid #5b21b6",
+            overflow: "hidden",
+            background: "#e0d7ff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "22px",
+          }}>🧑</div>
+        </div>
+      </header>
+
+      <div style={{ display: "flex", flex: 1 }}>
+        {/* Sidebar */}
+        <aside style={{
+          width: "230px",
+          background: "#5b21b6",
+          display: "flex",
+          flexDirection: "column",
+          padding: "24px 0 16px 0",
+          minHeight: "calc(85vh - 72px)",
+        }}>
+          <nav style={{ flex: 1 }}>
+            {navItems.map(item => (
+              <div key={item.label} style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "12px 20px",
+                cursor: "pointer",
+                color: item.label === "My Quizzes" ? "#fff" : "#c4b5fd",
+                background: item.label === "My Quizzes" ? "rgba(255,255,255,0.12)" : "transparent",
+                fontWeight: item.label === "My Quizzes" ? "700" : "500",
+                fontSize: "14px",
+                borderLeft: item.label === "My Quizzes" ? "4px solid #fff" : "4px solid transparent",
+              }}>
+                <span style={{ fontSize: "16px" }}>{item.icon}</span>
+                {item.label}
+              </div>
+            ))}
+          </nav>
+          <div style={{
+            margin: "16px 12px 12px 12px",
+            background: "rgba(255,255,255,0.1)",
+            borderRadius: "12px",
+            padding: "12px",
+            textAlign: "center",
+          }}>
+            <div style={{ color: "#fff", fontWeight: "700", fontSize: "13px" }}>UserName</div>
+            <div style={{ color: "#c4b5fd", fontSize: "11px", marginBottom: "10px" }}>student@gmail.com</div>
+            <button onClick={onBack} style={{
+              background: "#fff",
+              color: "#5b21b6",
+              border: "none",
+              borderRadius: "8px",
+              padding: "7px 18px",
+              fontWeight: "800",
+              fontSize: "12px",
+              cursor: "pointer",
+              width: "100%",
+            }}>LOG OUT</button>
+          </div>
+        </aside>
+
+>>>>>>> 112f53f (save work)
         {/* Main */}
         <main style={{ flex: 1, padding: "36px 40px" }}>
           {submitted ? (
@@ -551,6 +665,22 @@ function QuizPage({ quiz, onBack }) {
           )}
         </main>
       </div>
+<<<<<<< HEAD
+=======
+
+      <footer style={{
+        background: "#5b21b6",
+        color: "#e0d7ff",
+        padding: "16px 40px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        fontSize: "13px",
+      }}>
+        <span>Contact: quizhub@gmail.com</span>
+        <span>© 2026 Quiz Hub. All rights reserved.</span>
+      </footer>
+>>>>>>> 112f53f (save work)
     </div>
   );
 }
@@ -605,6 +735,7 @@ export default function QuizHub() {
         top: 0,
         zIndex: 100,
       }}>
+<<<<<<< HEAD
         {/* Logo */}
         <div>
           <img
@@ -613,6 +744,21 @@ export default function QuizHub() {
             alt="Quiz Hub logo"
             style={{ height: "50px" }}
           />
+=======
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{
+            background: "#5b21b6",
+            color: "#fff",
+            fontWeight: 900,
+            fontSize: 18,
+            borderRadius: 10,
+            padding: "6px 14px",
+            letterSpacing: 1,
+          }}>
+            QUIZ HUB
+          </div>
+          <span style={{ fontSize: 10, color: "#7c3aed", fontWeight: 700, letterSpacing: 2, marginLeft: 2 }}>●●●</span>
+>>>>>>> 112f53f (save work)
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <input
