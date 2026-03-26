@@ -606,14 +606,13 @@ export default function QuizHub() {
         zIndex: 100,
       }}>
         {/* Logo */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-          <div>
-            <img
-            src="/Adobe Express - file.png"
-            alt="Quiz Hub Logo"
-            style={{ height: "52px", objectFit: "contain" }}
-           />
-          </div>
+        <div>
+          <img
+            className="topbar-logo"
+            src={logoTrans}
+            alt="Quiz Hub logo"
+            style={{ height: "50px" }}
+          />
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <input
