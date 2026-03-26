@@ -1,5 +1,6 @@
-import React from "react";
-import logoWhBg from "../assets/logo_wh_bg.png";
+import React, { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import logoTrans from "../assets/logo_trans.png";
 
 function Icon({ children, size = 18 }) {
   return (
@@ -308,11 +309,97 @@ function QuizCard({ title, questions, completions, completionPercent }) {
 }
 
 function LecturerDashboard() {
-  const recentQuizzes = [
-    { title: "Python Programming Basics", questions: 15, completions: 28, completionPercent: 75 },
-    { title: "Introduction to React", questions: 15, completions: 28, completionPercent: 40 },
-    { title: "Database Fundamentals", questions: 15, completions: 28, completionPercent: 90 },
-  ];
+  const placeholderQuizzes = useMemo(
+    () => [
+      { title: "Recent Quiz", questions: 0, completions: 0, completionPercent: 0 },
+      { title: "Recent Quiz", questions: 0, completions: 0, completionPercent: 0 },
+      { title: "Recent Quiz", questions: 0, completions: 0, completionPercent: 0 },
+    ],
+    []
+  );
+
+  const [recentQuizzes, setRecentQuizzes] = useState(placeholderQuizzes);
+  const [loading, setLoading] = useState(true);
+
+  const [stats, setStats] = useState({
+    totalQuizzes: "TBD",
+    totalAttempts: "TBD",
+    participation: "TBD",
+    averageMarks: "TBD",
+  });
+
+  const [userName, setUserName] = useState("Lecturer");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const API_BASE = process.env.REACT_APP_API_BASE_URL || "";
+    const lecturerEmail =
+      window.localStorage.getItem("lecturerEmail") ||
+      window.localStorage.getItem("email") ||
+      "";
+
+    // Optional: if your login stores a name, use it; otherwise fall back to email.
+    const storedName = window.localStorage.getItem("lecturerName") || window.localStorage.getItem("name") || "";
+    if (!cancelled) {
+      setUserName(storedName || (lecturerEmail ? lecturerEmail.split("@")[0] : "Lecturer"));
+    }
+
+    const toNum = (v) => {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : 0;
+    };
+
+    const fetchDashboard = async () => {
+      try {
+        const params = {};
+        if (lecturerEmail) params.lecturerEmail = lecturerEmail;
+
+        // NOTE: Adjust these endpoints to match your backend.
+        const [statsRes, quizzesRes] = await Promise.all([
+          axios.get(`${API_BASE}/api/lecturers/dashboard-stats`, { params }).catch(() => null),
+          axios.get(`${API_BASE}/api/lecturers/recent-quizzes`, { params }).catch(() => null),
+        ]);
+
+        if (!cancelled) {
+          const sData = statsRes?.data;
+          if (sData) {
+            const normalized = {
+              totalQuizzes: sData.totalQuizzes ?? sData.quizzesCount ?? "TBD",
+              totalAttempts: sData.totalAttempts ?? sData.attemptsCount ?? "TBD",
+              participation: sData.participation ?? sData.studentParticipation ?? "TBD",
+              averageMarks: sData.averageMarks ?? sData.avgMarks ?? "TBD",
+            };
+            setStats(normalized);
+          }
+
+          const qData = quizzesRes?.data;
+          const list = qData?.quizzes ?? qData?.recentQuizzes ?? qData?.upcomingQuizzes ?? qData ?? [];
+          const normalizedQuizzes = Array.isArray(list)
+            ? list.slice(0, 3).map((q) => ({
+                title: q.title ?? q.quizTitle ?? q.name ?? "Recent Quiz",
+                questions: toNum(q.questions ?? q.questionCount),
+                completions: toNum(q.completions ?? q.completedCount ?? q.attempts),
+                completionPercent: toNum(q.completionPercent ?? q.completionRate ?? q.rate),
+              }))
+            : [];
+
+          setRecentQuizzes(normalizedQuizzes.length ? normalizedQuizzes : placeholderQuizzes);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          setRecentQuizzes(placeholderQuizzes);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    fetchDashboard();
+    return () => {
+      cancelled = true;
+    };
+  }, [placeholderQuizzes]);
 
   return (
     <div className="ld-root">
@@ -367,15 +454,12 @@ function LecturerDashboard() {
           font-size:18px;
         }
         .ld-brand-logo{
-          width: 34px;
-          height: 34px;
+          width: auto;
+          height: 36px;
           object-fit: contain;
           display:block;
         }
-        .ld-brand-text{
-          font-size:18px;
-          font-weight:900;
-        }
+        .ld-brand-text{ display:none; }
         .ld-nav{
           display:flex;
           flex-direction:column;
@@ -822,7 +906,7 @@ function LecturerDashboard() {
       <div className="ld-layout">
         <aside className="ld-sidebar">
           <div className="ld-brand">
-            <img className="ld-brand-logo" src={logoWhBg} alt="Quiz Hub" />
+            <img className="ld-brand-logo" src={logoTrans} alt="Quiz Hub" />
             <div className="ld-brand-text">QUIZ HUB</div>
           </div>
 
@@ -892,7 +976,7 @@ function LecturerDashboard() {
               </div>
 
               <div className="ld-user">
-                <div className="ld-user-name">Devendra Ranasinghe</div>
+                <div className="ld-user-name">{userName}</div>
                 <div className="ld-avatar" aria-hidden="true">
                   D
                 </div>
@@ -910,7 +994,7 @@ function LecturerDashboard() {
           <main className="ld-content">
             <section className="ld-welcome">
               <div className="ld-welcome-text">
-                <h1>Welcome back, Mr. Devendra!</h1>
+                <h1>Welcome back, {userName}!</h1>
                 <p>Lecturer Dashboard</p>
               </div>
 
@@ -921,7 +1005,7 @@ function LecturerDashboard() {
 
             <section className="ld-stats" aria-label="Summary statistics">
               <StatCard
-                value="03"
+                value={stats.totalQuizzes}
                 title="Total Quizzes"
                 icon={
                   <Icon>
@@ -930,7 +1014,7 @@ function LecturerDashboard() {
                 }
               />
               <StatCard
-                value="03"
+                value={stats.totalAttempts}
                 title="Total attempts"
                 icon={
                   <Icon>
@@ -939,7 +1023,7 @@ function LecturerDashboard() {
                 }
               />
               <StatCard
-                value="03"
+                value={stats.participation}
                 title="Student Participation"
                 icon={
                   <Icon>
@@ -948,7 +1032,7 @@ function LecturerDashboard() {
                 }
               />
               <StatCard
-                value="100%"
+                value={stats.averageMarks}
                 title="Average Marks"
                 icon={
                   <Icon>
@@ -961,7 +1045,7 @@ function LecturerDashboard() {
             <section className="ld-recent" aria-label="Recent quizzes">
               <div className="ld-recent-header">
                 <h2>Recent Quizzes</h2>
-                <p>Your recently created quizzes</p>
+                <p>{loading ? "Loading..." : "Your recently created quizzes"}</p>
               </div>
 
               <div className="ld-quiz-grid">

@@ -1,5 +1,6 @@
-import React, { useMemo, useRef } from "react";
-import logoWhBg from "../assets/logo_wh_bg.png";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import axios from "axios";
+import logoTrans from "../assets/logo_trans.png";
 
 function Icon({ children, size = 18 }) {
   return (
@@ -122,29 +123,82 @@ const SvgChevronRight = () => (
 );
 
 export default function StudentSchedule() {
-  const upcomingQuizzes = useMemo(
+  const placeholderQuizzes = useMemo(
     () => [
       {
-        dateLabel: "25th March",
-        title: "Object Oriented Programming",
-        deadline: "Deadline: 25th March",
-        timeLimit: "Time limit: 20min",
+        dateLabel: "TBD",
+        title: "Upcoming Quiz",
+        deadline: "Deadline: TBD",
+        timeLimit: "Time limit: TBD",
       },
       {
-        dateLabel: "28th March",
-        title: "Programming Framework",
-        deadline: "Deadline: 28th March",
-        timeLimit: "Time limit: 10min",
+        dateLabel: "TBD",
+        title: "Upcoming Quiz",
+        deadline: "Deadline: TBD",
+        timeLimit: "Time limit: TBD",
       },
       {
-        dateLabel: "25th March",
-        title: "Mobile Computing",
-        deadline: "Deadline: 12th April",
-        timeLimit: "Time limit: 60min",
+        dateLabel: "TBD",
+        title: "Upcoming Quiz",
+        deadline: "Deadline: TBD",
+        timeLimit: "Time limit: TBD",
       },
     ],
     []
   );
+
+  const [upcomingQuizzes, setUpcomingQuizzes] = useState(placeholderQuizzes);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const API_BASE = process.env.REACT_APP_API_BASE_URL || "";
+    const studentEmail =
+      window.localStorage.getItem("studentEmail") ||
+      window.localStorage.getItem("email") ||
+      "";
+
+    const params = {};
+    if (studentEmail) params.studentEmail = studentEmail;
+
+    const fetchUpcomingQuizzes = async () => {
+      try {
+        // NOTE: Update this endpoint when your backend is ready.
+        const res = await axios.get(`${API_BASE}/api/students/upcoming-quizzes`, {
+          params,
+        });
+
+        const data = res?.data;
+        const list = data?.quizzes ?? data?.upcomingQuizzes ?? data ?? [];
+
+        const normalized = Array.isArray(list)
+          ? list.map((q) => ({
+              dateLabel: q.dateLabel ?? q.date ?? q.scheduledDate ?? "TBD",
+              title: q.title ?? q.quizTitle ?? q.name ?? "Upcoming Quiz",
+              deadline:
+                q.deadline ??
+                (q.deadlineDate ? `Deadline: ${q.deadlineDate}` : "Deadline: TBD"),
+              timeLimit:
+                q.timeLimit ??
+                (q.timeLimitMinutes != null ? `Time limit: ${q.timeLimitMinutes}min` : "Time limit: TBD"),
+            }))
+          : [];
+
+        if (!cancelled) setUpcomingQuizzes(normalized.length ? normalized : placeholderQuizzes);
+      } catch (e) {
+        // If backend is not connected yet, keep placeholders.
+        if (!cancelled) setUpcomingQuizzes(placeholderQuizzes);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    fetchUpcomingQuizzes();
+    return () => {
+      cancelled = true;
+    };
+  }, [placeholderQuizzes]);
 
   // Keep for future navigation, but the current UI is styled like a static 3-card layout.
   const scrollerRef = useRef(null);
@@ -202,9 +256,9 @@ export default function StudentSchedule() {
           font-size:18px;
         }
         .ss-brand-logo{
-          width: 34px;
-          height: 34px;
-          object-fit:contain;
+          height: 36px;
+          width: auto;
+          object-fit: contain;
           display:block;
         }
         .ss-nav{
@@ -500,8 +554,7 @@ export default function StudentSchedule() {
       <div className="ss-layout">
         <aside className="ss-sidebar">
           <div className="ss-brand">
-            <img className="ss-brand-logo" src={logoWhBg} alt="Quiz Hub logo" />
-            <div>QUIZ HUB</div>
+            <img className="ss-brand-logo" src={logoTrans} alt="Quiz Hub logo" />
           </div>
 
           <nav className="ss-nav" aria-label="Student navigation">
@@ -591,6 +644,11 @@ export default function StudentSchedule() {
           <main className="ss-content">
             <div className="ss-panel">
               <h2>Upcoming Quizzes</h2>
+              {loading ? (
+                <div style={{ fontSize: 12, fontWeight: 700, color: "#6b7280", marginBottom: 14 }}>
+                  Loading quizzes...
+                </div>
+              ) : null}
 
               <div className="ss-carousel" aria-label="Upcoming quiz list">
                 <button className="ss-arrow ss-arrow--left" type="button" onClick={() => scrollByCards(-1)} aria-label="Previous quizzes">
