@@ -146,6 +146,7 @@ export default function StudentSchedule() {
     []
   );
 
+  // Keep for future navigation, but the current UI is styled like a static 3-card layout.
   const scrollerRef = useRef(null);
   const scrollByCards = (dir) => {
     const el = scrollerRef.current;
@@ -171,11 +172,13 @@ export default function StudentSchedule() {
           min-height:100vh;
           font-family:"Poppins", sans-serif;
           background: var(--ss-bg);
+          display:flex;
+          flex-direction:column;
         }
         .ss-layout{
           display:grid;
           grid-template-columns: 270px 1fr;
-          min-height:100vh;
+          flex:1;
         }
         @media (max-width: 980px){
           .ss-layout{ grid-template-columns: 1fr; }
@@ -284,18 +287,23 @@ export default function StudentSchedule() {
           align-items:center;
           justify-content:flex-end;
           gap: 18px;
+          position: relative;
         }
         .ss-search{
-          width: 520px;
-          max-width: 60vw;
-          position: relative;
-          margin-right: 12px;
+          width: 420px;
+          max-width: 52vw;
+          position:absolute;
+          left:50%;
+          transform:translateX(-50%);
+          margin-right:0;
         }
         @media (max-width: 980px){
           .ss-search{
             width: 100%;
             max-width: none;
-            margin-right: 0;
+            position: static;
+            left:auto;
+            transform:none;
           }
           .ss-topbar-inner{ justify-content: space-between; }
         }
@@ -343,6 +351,7 @@ export default function StudentSchedule() {
           display:flex;
           flex-direction:column;
           gap: 18px;
+          flex:1;
         }
         .ss-panel{
           background:#fff;
@@ -351,7 +360,7 @@ export default function StudentSchedule() {
           padding: 26px;
         }
         .ss-panel h2{
-          font-size: 18px;
+          font-size: 20px;
           font-weight: 900;
           color: #111827;
           margin-bottom: 16px;
@@ -365,69 +374,70 @@ export default function StudentSchedule() {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          width: 40px;
-          height: 40px;
-          border-radius: 12px;
+          width: 44px;
+          height: 44px;
+          border-radius: 14px;
           border: 0;
           cursor: pointer;
-          background: rgba(124,58,237,0.14);
-          color: #4a38d3;
+          background: transparent;
+          color: #111827;
           display:flex;
           align-items:center;
           justify-content:center;
           z-index: 5;
         }
-        .ss-arrow:hover{ background: rgba(124,58,237,0.22); }
-        .ss-arrow--left{ left: -10px; }
-        .ss-arrow--right{ right: -10px; }
+        .ss-arrow:hover{ background: rgba(17,24,39,0.06); }
+        .ss-arrow--left{ left: -20px; }
+        .ss-arrow--right{ right: -20px; }
         @media (max-width: 980px){
           .ss-arrow{ display:none; }
         }
 
         .ss-card-row{
           display:flex;
-          gap: 22px;
-          overflow-x:auto;
-          padding-bottom: 10px;
-          scroll-snap-type: x mandatory;
+          gap: 28px;
+          overflow:hidden;
+          padding: 10px 12px 0;
           scrollbar-width: none;
+          justify-content:center;
+          align-items:flex-start;
         }
         .ss-card-row::-webkit-scrollbar{ display:none; }
 
         .ss-quiz-card{
-          width: 260px;
+          width: 270px;
           flex: 0 0 auto;
-          scroll-snap-align: start;
-          background: #ffffff;
-          border-radius: 14px;
-          border: 1px solid rgba(15,23,42,0.10);
-          box-shadow: 0 18px 40px rgba(17,24,39,0.10);
-          padding: 16px 16px 18px;
+          background: #f3f4f6;
+          border-radius: 18px;
+          border: 1px solid rgba(15,23,42,0.08);
+          box-shadow: 0 14px 28px rgba(17,24,39,0.08);
+          padding: 18px 16px 18px;
           display:flex;
           flex-direction:column;
           gap: 12px;
-          min-height: 340px;
+          min-height: 356px;
         }
         .ss-date-pill{
           align-self:center;
-          background: rgba(75, 56, 211, 0.95);
+          background: rgba(75, 56, 211, 0.98);
           color:#fff;
           font-weight: 900;
-          font-size: 14px;
-          padding: 8px 14px;
+          font-size: 13.5px;
+          padding: 9px 16px;
           border-radius: 999px;
+          box-shadow: 0 10px 22px rgba(75,56,211,0.22);
         }
         .ss-quiz-title{
           text-align:left;
           font-weight: 900;
-          font-size: 14px;
+          font-size: 13.8px;
           color: #111827;
           line-height: 1.25;
           min-height: 44px;
         }
         .ss-meta{
           margin-top: 2px;
-          font-size: 12.5px;
+          font-size: 12.3px;
           font-weight: 700;
           color: #374151;
           display:flex;
@@ -441,18 +451,46 @@ export default function StudentSchedule() {
           gap: 10px;
         }
         .ss-btn{
-          height: 40px;
+          height: 38px;
           width: 100%;
-          border-radius: 10px;
+          border-radius: 12px;
           border:0;
           cursor:pointer;
           font-weight: 900;
           font-size: 14px;
-          transition: transform 0.15s ease, filter 0.15s ease;
+          transition: transform 0.15s ease;
         }
-        .ss-btn:hover{ transform: translateY(-1px); filter: brightness(0.98); }
-        .ss-btn--start{ background: #16a34a; color:#fff; }
-        .ss-btn--remind{ background: #dc2626; color:#fff; }
+        .ss-btn:hover{ transform: translateY(-1px); }
+        .ss-btn--start{
+          background: #16a34a;
+          color:#fff;
+          box-shadow: 0 12px 22px rgba(22,163,74,0.18);
+        }
+        .ss-btn--remind{
+          background: #dc2626;
+          color:#fff;
+          box-shadow: 0 12px 22px rgba(220,38,38,0.18);
+        }
+
+        /* Footer */
+        .ss-footer{
+          background: #4026a8;
+          color: #fff;
+          font-size: 14px;
+          padding: 14px 0;
+        }
+        .ss-footer-inner{
+          width: 100%;
+          max-width: 1200px;
+          padding: 0 26px 0 26px;
+          display:flex;
+          justify-content: space-between;
+          align-items:center;
+          gap: 16px;
+        }
+        @media (max-width: 980px){
+          .ss-footer-inner{ flex-direction:column; text-align:center; }
+        }
       `}</style>
 
       <div className="ss-layout">
@@ -587,6 +625,13 @@ export default function StudentSchedule() {
           </main>
         </div>
       </div>
+
+      <footer className="ss-footer">
+        <div className="ss-footer-inner">
+          <div>Contact: quizhub@gmail.com</div>
+          <div>© 2026 Quiz Hub. All rights reserved.</div>
+        </div>
+      </footer>
     </div>
   );
 }
