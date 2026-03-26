@@ -14,6 +14,7 @@ import StudentNotice from "./pages/Student - Notice";
 import StudentDashboard from "/pages/Student - Dashboard";
 import ProfilePopup from "./components/ProfilePopup";
 import AdminCourse from "./pages/Admin - courses";
+import AdminProfile from "./pages/Admin -Profile";
 
 export default function App() {
   const hash = window.location.hash.replace("#", "").toLowerCase();
