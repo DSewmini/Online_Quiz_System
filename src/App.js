@@ -6,7 +6,7 @@ import Quiz from './pages/Student - quizes';
 import HomePage from "./pages/homepage";
 import LecturerDashboard from "./pages/Lecturer - dashboard";
 import StudentSchedule from "./pages/Student - Schedule";
-import StudentDashboard from "./pages/Student - Dashboard";
+import StudentDashboard from "./pages/student - dashboard";
 import StudentNotice from "./pages/Student - Notice";
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logoTrans from "../assets/logo_trans_tight.png";
+import logoTrans from "../assets/logo_trans.png";
 import stDashboardImg from "../assets/st_dashboard_img.jpg";
 import ProfilePopup from "../components/ProfilePopup";
 
