@@ -13,6 +13,7 @@ import AdminProfile from './pages/Admin -Profile';
 import LecturerAnalytics from './pages/Lecturer - Analytics';
 import RegistrationPage from './pages/RegistrationPage';
 import StudentProfile from './pages/student-profile';
+import StudentLeaderboard from './pages/student-leaderboard';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/student-profile" element={<StudentProfile />} />
+        <Route path="/student-leaderboard" element={<StudentLeaderboard />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/quizes" element={<Quiz />} />
