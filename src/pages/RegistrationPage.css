@@ -1,0 +1,242 @@
+.registration-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  background: #f3f4f6;
+}
+
+.reg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.reg-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.reg-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.reg-nav a {
+  color: #111827;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.reg-nav a:hover {
+  color: #4338ca;
+}
+
+.reg-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 2.5rem 3rem 3rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.reg-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  padding: 1rem;
+}
+
+.reg-illustration img {
+  max-width: 100%;
+  max-height: min(520px, 70vh);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.reg-form-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.reg-form-card {
+  width: 100%;
+  max-width: 440px;
+  background: #e5e7eb;
+  border-radius: 16px;
+  padding: 2.25rem 2rem 2rem;
+  box-sizing: border-box;
+}
+
+.reg-form-title {
+  margin: 0 0 1.75rem;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reg-field {
+  margin-bottom: 1rem;
+}
+
+.reg-field:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.reg-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.reg-input-wrap input,
+.reg-input-wrap select {
+  width: 100%;
+  padding: 0.85rem 1.15rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #111827;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 9999px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease;
+}
+
+.reg-input-wrap input::placeholder {
+  color: #9ca3af;
+}
+
+.reg-input-wrap input:focus,
+.reg-input-wrap select:focus {
+  border-color: #4338ca;
+}
+
+.reg-input-wrap select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 2.75rem;
+  color: #6b7280;
+}
+
+.reg-input-wrap select.has-value {
+  color: #111827;
+}
+
+.reg-input-wrap .reg-toggle {
+  position: absolute;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+}
+
+.reg-input-wrap .reg-toggle:hover {
+  color: #6b7280;
+}
+
+.reg-input-wrap .reg-select-chevron {
+  position: absolute;
+  right: 1rem;
+  pointer-events: none;
+  color: #9ca3af;
+}
+
+.reg-input-wrap input.reg-input-with-toggle {
+  padding-right: 3rem;
+}
+
+.reg-submit {
+  width: 100%;
+  padding: 0.95rem 1.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #4338ca;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.reg-submit:hover {
+  background: #3730a3;
+}
+
+.reg-submit:active {
+  transform: scale(0.99);
+}
+
+.reg-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: #4338ca;
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+.reg-footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.reg-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .reg-main {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+  .reg-illustration {
+    min-height: 280px;
+    order: -1;
+  }
+
+  .reg-illustration img {
+    max-height: 320px;
+  }
+
+  .reg-header,
+  .reg-footer {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}

@@ -11,12 +11,14 @@ import StudentNotice from './pages/Student - Notice';
 import AdminCourse from './pages/Admin - courses';
 import AdminProfile from './pages/Admin -Profile';
 import LecturerAnalytics from './pages/Lecturer - Analytics';
+import RegistrationPage from './pages/RegistrationPage';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/register" element={<RegistrationPage />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/quizes" element={<Quiz />} />

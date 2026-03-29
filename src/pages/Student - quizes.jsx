@@ -1,8 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-<<<<<<< HEAD
-import logoTrans from "../assets/logo_trans.png";
-=======
->>>>>>> 112f53f (save work)
 
 const quizzes = [
   {
@@ -239,9 +235,8 @@ function QuizPage({ quiz, onBack }) {
 
   return (
     <div style={{ fontFamily: "'Segoe UI', sans-serif", minHeight: "100vh", display: "flex", flexDirection: "column", background: "#f3f4f6" }}>
-<<<<<<< HEAD
+
       <div style={{ display: "flex", flex: 1 }}>
-=======
       {/* Header */}
       <header style={{
         background: "#fff",
@@ -350,7 +345,6 @@ function QuizPage({ quiz, onBack }) {
           </div>
         </aside>
 
->>>>>>> 112f53f (save work)
         {/* Main */}
         <main style={{ flex: 1, padding: "36px 40px" }}>
           {submitted ? (
@@ -665,8 +659,7 @@ function QuizPage({ quiz, onBack }) {
           )}
         </main>
       </div>
-<<<<<<< HEAD
-=======
+
 
       <footer style={{
         background: "#5b21b6",
@@ -680,7 +673,6 @@ function QuizPage({ quiz, onBack }) {
         <span>Contact: quizhub@gmail.com</span>
         <span>© 2026 Quiz Hub. All rights reserved.</span>
       </footer>
->>>>>>> 112f53f (save work)
     </div>
   );
 }
@@ -735,16 +727,9 @@ export default function QuizHub() {
         top: 0,
         zIndex: 100,
       }}>
-<<<<<<< HEAD
+
         {/* Logo */}
-        <div>
-          <img
-            className="topbar-logo"
-            src={logoTrans}
-            alt="Quiz Hub logo"
-            style={{ height: "50px" }}
-          />
-=======
+          
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{
             background: "#5b21b6",
@@ -758,7 +743,7 @@ export default function QuizHub() {
             QUIZ HUB
           </div>
           <span style={{ fontSize: 10, color: "#7c3aed", fontWeight: 700, letterSpacing: 2, marginLeft: 2 }}>●●●</span>
->>>>>>> 112f53f (save work)
+
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <input
@@ -929,6 +914,8 @@ export default function QuizHub() {
         <span>Contact: quizhub@gmail.com</span>
         <span>© 2026 Quiz Hub. All rights reserved.</span>
       </footer>
+      </div>
     </div>
   );
 }
+
